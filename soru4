@@ -1,0 +1,44 @@
+import time
+import random
+
+#Quick sort algoritması
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr)//2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+#BruteForce algoritması
+def brute_force(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(i+1, n):
+            if arr[i] > arr[j]:
+                arr[i], arr[j] = arr[j], arr[i]
+    return arr
+
+#Rastgele oluşturulmuş 10000 sayılık bir dizi
+arr = [random.randint(1, 10000) for _ in range(10000)]
+
+#Quick sort algoritmasının çalışma süresi
+start_time = time.time()
+sorted_arr = quick_sort(arr)
+end_time = time.time()
+quick_sort_time = end_time - start_time
+print("Quick sort çalışma süresi:", quick_sort_time)
+
+#BruteForce algoritmasının çalışma süresi
+start_time = time.time()
+sorted_arr = brute_force(arr)
+end_time = time.time()
+brute_force_time = end_time - start_time
+print("BruteForce çalışma süresi:", brute_force_time)
+
+#İki algoritmanın karşılaştırması
+if quick_sort_time < brute_force_time:
+    print("Quick sort algoritması BruteForce algoritmasından daha hızlıdır.")
+else:
+    print("BruteForce algoritması Quick sort algoritmasından daha hızlıdır.")
