@@ -1,0 +1,41 @@
+import random
+import time
+
+def binary_search(arr):
+    low = 0
+    high = len(arr) - 1
+    max_num = arr[0]
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] > max_num:
+            max_num = arr[mid]
+        if arr[mid] > arr[high]:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return max_num
+
+# Rastgele 10000 sayılık bir dizi oluştur
+arr = [random.randint(1, 1000) for i in range(10000)]
+
+# Binary search ile en büyük sayıyı bulma
+start_time = time.time()
+max_num = binary_search(arr)
+end_time = time.time()
+print(f"Binary search ile en büyük sayı: {max_num}")
+print(f"Çalışma süresi: {end_time - start_time} saniye")
+
+#BruteForce
+def brute_force_max(arr):
+    max_num = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] > max_num:
+            max_num = arr[i]
+    return max_num
+
+# Brute Force ile en büyük sayıyı bulma
+start_time = time.time()
+max_num = brute_force_max(arr)
+end_time = time.time()
+print(f"Brute Force ile en büyük sayı: {max_num}")
+print(f"Çalışma süresi: {end_time - start_time} saniye")
